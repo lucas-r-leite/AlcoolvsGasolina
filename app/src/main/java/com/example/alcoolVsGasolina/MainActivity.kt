@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -62,59 +63,51 @@ fun AlcoolVsGasolina(){
             )
         )
 
-        var valorGasolina = remember {
-            mutableStateOf("")
-        }
-
-        var valorAlcool = remember {
-            mutableStateOf("")
-        }
-
+        val valorGasolina = remember { mutableStateOf("") }
+        val valorAlcool = remember { mutableStateOf("") }
+        val resultado = remember { mutableStateOf("") }
 
         Spacer(modifier = Modifier.size(16.dp))
         TextField(
             value = valorGasolina.value,
-            onValueChange = {newValue ->
+            onValueChange = { newValue ->
                 valorGasolina.value = newValue
             },
             label = {
                 Text(text = "Digite o valor da gasolina" )
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-
         )
 
         Spacer(modifier = Modifier.size(16.dp))
         TextField(
             value = valorAlcool.value,
-            onValueChange = {newValue ->
+            onValueChange = { newValue ->
                 valorAlcool.value = newValue
             },
             label = {
                 Text(text = "Digite o valor do álcool" )
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-
         )
 
-        if (valorGasolina.value != "" && valorAlcool.value != "") {
-            val result = valorAlcool.value.toDouble() / valorGasolina.value.toDouble() > 0.7
-            if(result){
-                Spacer(modifier = Modifier.size(16.dp))
-                Text(text = "Melhor abastecer com gasolina")
-            }else{
-                Spacer(modifier = Modifier.size(16.dp))
-                Text(text = "Melhor abastecer com alcool")
-
+        Spacer(modifier = Modifier.size(16.dp))
+        Button(onClick = {
+            if (valorGasolina.value.isNotEmpty() && valorAlcool.value.isNotEmpty()) {
+                val result = valorAlcool.value.toDouble() / valorGasolina.value.toDouble() > 0.7
+                resultado.value = if (result) {
+                    "Melhor abastecer com gasolina"
+                } else {
+                    "Melhor abastecer com alcool"
+                }
             }
-
+        }) {
+            Text("Calcular", fontSize = 18.sp, fontWeight = FontWeight.Bold)
         }
 
+        Spacer(modifier = Modifier.size(16.dp))
+        Text(text = resultado.value)
     }
-
-
-
-
 }
 
 @Preview(showBackground = true)
