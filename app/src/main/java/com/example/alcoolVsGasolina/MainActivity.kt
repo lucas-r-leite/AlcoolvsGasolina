@@ -93,8 +93,14 @@ fun AlcoolVsGasolina(){
 
         if (valorGasolina.value != "" && valorAlcool.value != "") {
             val result = valorAlcool.value.toDouble() / valorGasolina.value.toDouble() > 0.7
-            Spacer(modifier = Modifier.size(16.dp))
-            Text(text = "Resultado: $result")
+            if(result){
+                Spacer(modifier = Modifier.size(16.dp))
+                Text(text = "Melhor abastecer com gasolina")
+            }else{
+                Spacer(modifier = Modifier.size(16.dp))
+                Text(text = "Melhor abastecer com alcool")
+
+            }
 
         }
 
