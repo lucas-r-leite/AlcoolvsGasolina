@@ -71,7 +71,7 @@ fun AlcoolVsGasolina(){
         TextField(
             value = valorGasolina.value,
             onValueChange = { newValue ->
-                valorGasolina.value = newValue
+                valorGasolina.value = newValue.replace(",", ".")
             },
             label = {
                 Text(text = "Digite o valor da gasolina" )
@@ -83,7 +83,7 @@ fun AlcoolVsGasolina(){
         TextField(
             value = valorAlcool.value,
             onValueChange = { newValue ->
-                valorAlcool.value = newValue
+                valorAlcool.value = newValue.replace(",", ".")
             },
             label = {
                 Text(text = "Digite o valor do álcool" )
